@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Aniversário, Sapeca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,300&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#080C0B; --night2:#101715; --pine:#16211E;
+    --mist:#93A3A0; --frost:#DCE6E3;
+    --blood:#7E1C24; --crimson:#A83240;
+    --edge:rgba(220,230,227,.13);
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --sans:'Jost',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;background:var(--night);color:var(--frost);
+    font-family:var(--sans);font-weight:300;overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:1;
+    background:
+      radial-gradient(ellipse 70% 45% at 15% 5%,  rgba(147,163,160,.13), transparent 70%),
+      radial-gradient(ellipse 60% 50% at 90% 70%, rgba(126,28,36,.10),  transparent 70%),
+      radial-gradient(ellipse 90% 30% at 50% 100%,rgba(22,33,30,.55),   transparent 75%);
+  }
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+  :focus-visible{outline:1px solid var(--mist);outline-offset:4px;}
+  ::selection{background:var(--blood);color:var(--frost);}
+  .wrap{max-width:720px;margin:0 auto;padding:0 24px;position:relative;z-index:2;}
+
+  /* ---------- abertura ---------- */
+  .hero{
+    position:relative;min-height:100svh;display:flex;flex-direction:column;
+    align-items:center;justify-content:flex-end;text-align:center;
+    padding:40px 24px 60px;overflow:hidden;z-index:2;
+  }
+  .hero-photo{position:absolute;inset:0;z-index:-2;}
+  .hero-photo img{
+    width:100%;height:100%;object-fit:cover;object-position:center 30%;
+    filter:grayscale(.55) contrast(1.06) brightness(.72) saturate(.75);
+  }
+  .hero-veil{
+    position:absolute;inset:0;z-index:-1;
+    background:linear-gradient(180deg, rgba(8,12,11,.72) 0%, rgba(8,12,11,.35) 35%, rgba(8,12,11,.88) 78%, var(--night) 100%);
+  }
+  .treeline{
+    position:absolute;left:0;right:0;bottom:0;height:150px;z-index:-1;
+    background-repeat:repeat-x;background-position:bottom center;background-size:220px 150px;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='150' viewBox='0 0 220 150'><g fill='%23080C0B'><path d='M20 150 L20 70 L8 92 L18 88 L4 112 L16 108 L0 132 L40 132 L24 108 L36 112 L22 88 L32 92 Z'/><path d='M70 150 L70 46 L54 76 L66 71 L48 104 L62 99 L42 130 L98 130 L78 99 L92 104 L74 71 L86 76 Z'/><path d='M130 150 L130 82 L120 100 L128 96 L116 118 L126 114 L112 136 L148 136 L134 114 L144 118 L132 96 L140 100 Z'/><path d='M186 150 L186 56 L172 84 L182 79 L166 110 L178 105 L160 132 L212 132 L194 105 L206 110 L190 79 L200 84 Z'/></g></svg>");
+    opacity:.9;
+  }
+  .kicker{font-size:11px;letter-spacing:.42em;color:var(--mist);text-transform:uppercase;margin-bottom:18px;}
+  h1{
+    font-family:var(--serif);font-weight:300;font-size:clamp(42px,11vw,88px);
+    line-height:.96;margin:0;text-shadow:0 2px 40px rgba(8,12,11,.9);
+  }
+  h1 em{font-style:italic;color:var(--crimson);}
+  .hero .sub{font-family:var(--serif);font-style:italic;font-size:clamp(17px,3.4vw,21px);color:var(--mist);margin-top:16px;}
+  .counter{display:flex;margin-top:40px;border-top:1px solid var(--edge);border-bottom:1px solid var(--edge);}
+  .counter .unit{padding:18px 22px;position:relative;min-width:92px;}
+  .counter .unit + .unit::before{content:"";position:absolute;left:0;top:22%;bottom:22%;width:1px;background:var(--edge);}
+  .counter .num{font-family:var(--serif);font-size:clamp(28px,7vw,44px);font-weight:300;line-height:1;font-variant-numeric:tabular-nums;}
+  .counter .label{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--mist);margin-top:9px;}
+  .pulse{margin-top:24px;font-size:12px;letter-spacing:.16em;color:var(--mist);text-transform:uppercase;}
+  .pulse b{color:var(--crimson);font-weight:400;font-variant-numeric:tabular-nums;}
+  .down{margin-top:34px;font-size:11px;letter-spacing:.3em;color:var(--mist);text-transform:uppercase;opacity:.7;}
+
+  /* ---------- seções ---------- */
+  section{padding:96px 0;position:relative;z-index:2;}
+  .sec-head{text-align:center;margin-bottom:46px;}
+  .sec-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(30px,6vw,46px);margin:0 0 12px;}
+  .sec-head .hint{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--mist);}
+  .rule{width:1px;height:64px;margin:0 auto;background:linear-gradient(var(--edge),transparent);}
+
+  .diary{
+    width:min(100%,440px);margin:0 auto;padding:34px 28px;cursor:pointer;
+    border:1px solid var(--edge);background:linear-gradient(160deg,var(--night2),var(--pine));
+    text-align:center;transition:border-color .4s,transform .4s;
+  }
+  .diary:hover{border-color:rgba(168,50,64,.5);transform:translateY(-3px);}
+  .diary .sigil{font-family:var(--serif);font-size:44px;color:var(--crimson);line-height:1;}
+  .diary .dl{font-family:var(--serif);font-style:italic;font-size:19px;margin-top:14px;}
+  .diary .dh{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--mist);margin-top:14px;}
+  .diary.open{border-color:rgba(147,163,160,.45);}
+  .diary.open .sigil{color:var(--mist);}
+  .letter{max-height:0;opacity:0;overflow:hidden;transition:max-height .7s cubic-bezier(.2,.7,.2,1),opacity .5s;}
+  .letter.show{max-height:1600px;opacity:1;}
+  .letter-inner{margin-top:32px;padding:clamp(28px,6vw,48px);border:1px solid var(--edge);background:var(--night2);}
+  .letter p{font-family:var(--serif);font-size:clamp(18px,4vw,21px);line-height:1.85;margin:0 0 20px;}
+  .letter .sign{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--crimson);text-align:right;margin-top:26px;}
+
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  .photo{
+    aspect-ratio:3/4;border:1px solid var(--edge);background:var(--night2);
+    overflow:hidden;cursor:pointer;position:relative;padding:0;transition:border-color .35s;
+  }
+  .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(8,12,11,.7));opacity:.85;transition:opacity .35s;}
+  .photo:hover{border-color:rgba(168,50,64,.55);}
+  .photo:hover::after{opacity:.3;}
+  .photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(.6) contrast(1.05) saturate(.7);transition:filter .5s,transform .7s;}
+  .photo:hover img{filter:none;transform:scale(1.05);}
+
+  .lightbox{position:fixed;inset:0;background:rgba(4,7,6,.96);z-index:100;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(5px);}
+  .lightbox.show{display:flex;}
+  .lb-box{max-width:560px;width:100%;text-align:center;}
+  .lb-slot{aspect-ratio:3/4;max-height:70svh;border:1px solid var(--edge);display:flex;align-items:center;justify-content:center;overflow:hidden;margin:0 auto;}
+  .lb-slot img{width:100%;height:100%;object-fit:contain;}
+  .lb-cap{font-family:var(--serif);font-style:italic;font-size:18px;margin-top:18px;color:var(--mist);}
+  .lb-bar{display:flex;justify-content:center;gap:26px;margin-top:20px;}
+  .lb-bar button{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--mist);padding:8px 4px;transition:color .3s;}
+  .lb-bar button:hover{color:var(--crimson);}
+
+  .video-frame{border:1px solid var(--edge);background:var(--night2);padding:10px;}
+  .video-frame video{width:100%;display:block;}
+  .video-frame + .video-frame{margin-top:18px;}
+  .video-cap{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--mist);text-align:center;padding:12px 6px 4px;}
+  .video-empty{border:1px dashed var(--edge);padding:48px 24px;text-align:center;color:var(--mist);font-size:14px;line-height:1.7;}
+
+  .album-box{border:1px solid var(--edge);background:linear-gradient(160deg,var(--night2),var(--pine));padding:clamp(30px,6vw,48px);text-align:center;}
+  .album-texto{font-family:var(--serif);font-size:clamp(18px,4vw,22px);line-height:1.7;max-width:420px;margin:0 auto 30px;}
+  .album-btn{
+    display:inline-block;text-decoration:none;font-size:11px;letter-spacing:.3em;
+    text-transform:uppercase;color:var(--mist);border:1px solid var(--edge);
+    padding:16px 32px;transition:border-color .4s,color .4s;
+  }
+  .album-btn:hover{border-color:var(--crimson);color:var(--crimson);}
+
+  .timeline{border-left:1px solid var(--edge);padding-left:30px;}
+  .tl-item{position:relative;padding-bottom:8px;}
+  .tl-item + .tl-item{margin-top:26px;}
+  .tl-item::before{
+    content:"";position:absolute;left:-35px;top:10px;width:9px;height:9px;
+    border:1px solid var(--crimson);background:var(--night);transform:rotate(45deg);
+    transition:background .35s,transform .35s;
+  }
+  .tl-item.open::before{background:var(--crimson);transform:rotate(45deg) scale(1.3);}
+  .tl-head{display:block;width:100%;text-align:left;padding:0;}
+  .tl-date{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--crimson);margin-bottom:7px;}
+  .tl-title{font-family:var(--serif);font-size:clamp(20px,4.4vw,25px);line-height:1.3;}
+  .tl-detail{max-height:0;overflow:hidden;opacity:0;font-family:var(--serif);font-size:18px;line-height:1.75;color:var(--mist);transition:max-height .5s ease,opacity .4s,margin .4s;}
+  .tl-item.open .tl-detail{max-height:400px;opacity:1;margin-top:12px;}
+
+  .track{display:flex;align-items:center;gap:20px;width:100%;text-align:left;padding:18px 4px;border-bottom:1px solid var(--edge);transition:padding-left .35s;}
+  .faixa{border-bottom:1px solid var(--edge);}
+  .faixa:first-child{border-top:1px solid var(--edge);}
+  .faixa .track{border-bottom:none;}
+  .tocador{max-height:0;overflow:hidden;transition:max-height .45s ease;}
+  .tocador.aberto{max-height:280px;padding-bottom:18px;}
+  .tocador iframe{width:100%;aspect-ratio:16/9;border:1px solid var(--edge);display:block;}
+  .track:hover{padding-left:14px;}
+  .disc{width:38px;height:38px;border-radius:50%;flex-shrink:0;position:relative;background:conic-gradient(#141C1A,#2E1A1E,#141C1A,#22161A,#141C1A);border:1px solid var(--edge);}
+  .disc::after{content:"";position:absolute;inset:15px;background:var(--crimson);border-radius:50%;}
+  .track.playing .disc{animation:spin 4s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .t-name{font-family:var(--serif);font-size:20px;}
+  .t-artist{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mist);margin-top:4px;}
+  .t-state{margin-left:auto;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--mist);}
+  .track.playing .t-state{color:var(--crimson);}
+
+  .reasons{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+  .card{aspect-ratio:3/2;perspective:900px;padding:0;}
+  .card-in{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d;}
+  .card.flipped .card-in{transform:rotateY(180deg);}
+  .face{position:absolute;inset:0;backface-visibility:hidden;border:1px solid var(--edge);display:flex;align-items:center;justify-content:center;padding:18px;text-align:center;}
+  .front{background:linear-gradient(150deg,var(--pine),var(--night2));font-family:var(--serif);font-size:28px;color:var(--crimson);}
+  .back{transform:rotateY(180deg);background:var(--night2);border-color:rgba(147,163,160,.35);font-family:var(--serif);font-size:clamp(15px,3.4vw,18px);line-height:1.5;}
+
+  footer{text-align:center;padding:80px 24px 110px;position:relative;z-index:2;}
+  .quote{font-family:var(--serif);font-style:italic;font-size:clamp(26px,6vw,40px);line-height:1.4;max-width:520px;margin:0 auto 40px;}
+  .forever{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--mist);border:1px solid var(--edge);padding:16px 34px;transition:border-color .4s,color .4s;}
+  .forever:hover{border-color:var(--crimson);color:var(--crimson);}
+  .final{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--mist);margin-top:46px;}
+  .pedido-fundo{
+    position:fixed;inset:0;background:rgba(4,7,6,.95);z-index:150;
+    display:none;align-items:center;justify-content:center;padding:24px;
+    backdrop-filter:blur(6px);
+  }
+  .pedido-fundo.show{display:flex;animation:surge .5s ease both;}
+  @keyframes surge{from{opacity:0;}to{opacity:1;}}
+  .pedido-caixa{
+    max-width:400px;width:100%;text-align:center;padding:34px 26px;
+    max-height:92svh;overflow-y:auto;
+    border:1px solid rgba(147,163,160,.35);
+    background:linear-gradient(160deg,var(--night2),var(--pine));
+    animation:sobe .55s cubic-bezier(.2,.7,.2,1) both;
+  }
+  @keyframes sobe{from{transform:translateY(24px) scale(.97);}to{transform:none;}}
+  .pedido-selo{font-family:var(--serif);font-size:34px;color:var(--crimson);line-height:1;}
+  .pedido-titulo{
+    font-family:var(--serif);font-weight:300;font-size:clamp(24px,6vw,32px);
+    margin:14px 0 24px;color:var(--frost);
+  }
+  .pedido-foto{
+    width:min(100%,200px);margin:0 auto;border:1px solid var(--edge);
+    background:var(--night);line-height:0;
+  }
+  .pedido-foto img{width:100%;height:auto;max-height:46svh;object-fit:contain;display:block;}
+  .pedido-texto{
+    font-family:var(--serif);font-style:italic;font-size:clamp(17px,4vw,20px);
+    line-height:1.6;color:var(--frost);margin-top:24px;
+  }
+  .pedido-fechar{
+    margin-top:28px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--mist);border:1px solid var(--edge);padding:14px 30px;
+    transition:border-color .4s,color .4s;
+  }
+  .pedido-fechar:hover{border-color:var(--crimson);color:var(--crimson);}
+
+  .petal{position:fixed;pointer-events:none;z-index:200;font-size:18px;color:var(--crimson);}
+
+  @media (max-width:540px){
+    .gallery{grid-template-columns:repeat(2,1fr);}
+    .reasons{grid-template-columns:1fr;}
+    .counter .unit{padding:16px 14px;min-width:76px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-photo"><img id="heroImg" src="" alt=""></div>
+  <div class="hero-veil"></div>
+  <div class="treeline"></div>
+  <div class="kicker">10 · 09 · 1997</div>
+  <h1>Feliz <em>Aniversário</em></h1>
+  <div class="sub" id="heroSub"></div>
+  <div class="counter" id="counter"></div>
+  <div class="pulse">seu coração já bateu <b id="beats">—</b> vezes</div>
+  <div class="down">role</div>
+</header>
+
+<main>
+  <section><div class="wrap">
+    <div class="sec-head"><h2 id="t-carta"></h2><div class="hint">abra o diário</div></div>
+    <div class="diary" id="diary" role="button" tabindex="0" aria-expanded="false" aria-controls="letter">
+      <div class="sigil">✦</div>
+      <div class="dl" id="diary-label"></div>
+      <div class="dh">tocar para abrir</div>
+    </div>
+    <div class="letter" id="letter"><div class="letter-inner" id="letter-inner"></div></div>
+  </div></section>
+
+  <div class="rule"></div>
+
+  <section><div class="wrap">
+    <div class="sec-head"><h2 id="t-galeria"></h2><div class="hint">toque para ampliar</div></div>
+    <div class="gallery" id="gallery"></div>
+  </div></section>
+
+  <div class="rule"></div>
+
+  <section><div class="wrap">
+    <div class="sec-head"><h2 id="t-video"></h2><div class="hint" id="h-video"></div></div>
+    <div id="videoHolder"></div>
+  </div></section>
+
+  <div class="rule" id="rule-album"></div>
+
+  <section id="sec-album"><div class="wrap">
+    <div class="sec-head"><h2 id="t-album"></h2></div>
+    <div class="album-box">
+      <div class="album-texto" id="album-texto"></div>
+      <a class="album-btn" id="album-btn" href="#" target="_blank" rel="noopener"></a>
+    </div>
+  </div></section>
+
+  <div class="rule"></div>
+
+  <section><div class="wrap">
+    <div class="sec-head"><h2 id="t-tempo"></h2><div class="hint">toque em cada momento</div></div>
+    <div class="timeline" id="timeline"></div>
+  </div></section>
+
+  <div class="rule"></div>
+
+  <section><div class="wrap">
+    <div class="sec-head"><h2 id="t-musica"></h2><div class="hint">toque para tocar aqui</div></div>
+    <div id="playlist"></div>
+    <audio id="player" preload="none"></audio>
+  </div></section>
+
+  <div class="rule"></div>
+
+  <section><div class="wrap">
+    <div class="sec-head"><h2 id="t-motivos"></h2><div class="hint">vire cada carta</div></div>
+    <div class="reasons" id="reasons"></div>
+  </div></section>
+</main>
+
+<footer>
+  <div class="quote" id="quote"></div>
+  <button class="forever" id="foreverBtn">faça um pedido</button>
+  <div class="final" id="assinaturaFinal"></div>
+</footer>
+
+<div class="pedido-fundo" id="pedidoFundo" role="dialog" aria-modal="true" aria-labelledby="pedidoTitulo">
+  <div class="pedido-caixa">
+    <div class="pedido-selo">✦</div>
+    <h3 class="pedido-titulo" id="pedidoTitulo"></h3>
+    <div class="pedido-foto"><img id="pedidoImg" src="" alt=""></div>
+    <div class="pedido-texto" id="pedidoTexto"></div>
+    <button class="pedido-fechar" id="pedidoFechar"></button>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Foto ampliada">
+  <div class="lb-box">
+    <div class="lb-slot" id="lbSlot"></div>
+    <div class="lb-cap" id="lbCap"></div>
+    <div class="lb-bar">
+      <button id="lbPrev">anterior</button>
+      <button id="lbNext">próxima</button>
+      <button id="lbClose">fechar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   EDITE TUDO AQUI. Só neste bloco.
+   ===================================================================== */
+const CONTEUDO = {
+  nascimento: "1997-09-10T00:00:00",
+  namoro:     "2023-11-22T00:00:00",
+
+  // false = as fotos aparecem sem legenda. Mude para true se quiser mostrá-las.
+  mostrarLegendas: false,
+
+  heroFoto: "fotos/04-asas.jpg",
+  heroLegenda: "Harumi",
+
+  titulos: {
+    carta:   "O diário",
+    galeria: "Fragmentos",
+    video:   "Um recado",
+    tempo:   "As noites que ficaram",
+    musica:  "O que tocava",
+    motivos: "O que eu queria te dizer"
+  },
+
+  diarioLabel: "para a Sapeca",
+
+  carta: [
+    "Feliz aniversário, Sapeca.",
+    "Muito sucesso sempre — em tudo o que você começar, em tudo o que você decidir ser.",
+    "Sou muito feliz de estar passando esse tempo com você.",
+    "E pode sempre contar comigo. Sempre."
+  ],
+  assinatura: "Te amo, Sapeca.",
+
+  fotos: [
+    { src:"fotos/01-coroa-pikachu.jpg", legenda:"As coroas de Pikachu" },
+    { src:"fotos/02-bolo.jpg",          legenda:"Dividindo o bolo na marra" },
+    { src:"fotos/03-parque.jpg",        legenda:"As luzes do parque" },
+    { src:"fotos/04-asas.jpg",          legenda:"Você e suas asas" },
+    { src:"fotos/05-lago.jpg",          legenda:"O passeio de barco" },
+    { src:"fotos/06-jantar.jpg",        legenda:"Jantar sob as lanternas" },
+    { src:"fotos/07-castelo.jpg",       legenda:"Princesa e príncipe do shopping" },
+    { src:"fotos/08-rio.jpg",           legenda:"Rio de Janeiro" },
+    { src:"fotos/09-fliperama.jpg",     legenda:"O dia dos bichinhos de pelúcia" },
+    { src:"fotos/10-brasilia.jpg",      legenda:"Brasília no fim da tarde" },
+    { src:"fotos/11-mascaras.jpg",      legenda:"Dia de autocuidado" },
+    { src:"fotos/12-cinema.jpg",        legenda:"Nossa sessão de cinema" },
+    { src:"fotos/13-scenarium.jpg",     legenda:"Rio Scenarium" },
+    { src:"fotos/14-estrelas.jpg",      legenda:"Sob as estrelas de vidro" },
+    { src:"fotos/15-jantar2.jpg",       legenda:"Mais uma noite boa" },
+    { src:"fotos/16-anonovo.jpg",       legenda:"A virada de 2026" },
+    { src:"fotos/17-pelucias.jpg",      legenda:"O abraço nos pelúcia" },
+    { src:"fotos/18-natal.jpg",         legenda:"Natal de Stitch" },
+    { src:"fotos/19-natal2.jpg",        legenda:"Nosso Natal" }
+  ],
+
+  // VÍDEOS — precisa ser .mp4. Para tirar um, apague a linha inteira.
+  videos: [
+    { src:"video/video-1.mp4", poster:"fotos/06-jantar.jpg",   legenda:"A gente virando blogueiro de doce japonês" },
+    { src:"video/video-2.mp4", poster:"fotos/17-pelucias.jpg", legenda:"A Sapeca tentando ser malandra" }
+  ],
+
+  // ÁLBUM COMPARTILHADO — cole o link do Drive ou do Google Fotos.
+  // Deixe "" para a seção sumir do site.
+  album: {
+    link:  "",
+    titulo:"O que ainda vamos viver",
+    texto: "Este álbum é nosso. Vai enchendo com o que a gente for vivendo.",
+    botao: "abrir nosso álbum"
+  },
+
+  linhaDoTempo: [
+    { data:"10 set 1997", titulo:"O dia em que você chegou ao mundo",
+      detalhe:"E o mundo ficou bem melhor a partir dali, mesmo sem saber ainda." },
+    { data:"22 nov 2023", titulo:"O dia em que a gente começou",
+      detalhe:"Foi quando a minha vida começou a fazer sentido. Não que ela estivesse errada antes — é que faltava você nela, e eu só descobri isso depois que você chegou." }
+  ],
+
+  musicas: [
+    { nome:"All I Need",              artista:"Within Temptation", yt:"0wCuyZkMZTw" },
+    { nome:"A Cera (Pirou o Cabeção)", artista:"O Surto",           yt:"WrBznflRvB8" },
+    { nome:"Papoulas",                artista:"Yago Oproprio",     yt:"cyX-BUNcCqs" },
+    { nome:"Brilho",                  artista:"Tamatoa · Moana",   yt:"93lrosBEW-Q" }
+  ],
+
+  motivos: [
+    "Que você sempre pode contar comigo.",
+    "Você é muito importante.",
+    "Aproveita o seu dia, mesmo na correria das viagens.",
+    "Quase trintando, mozão."
+  ],
+
+  // O que aparece quando ela toca em "faça um pedido".
+  pedido: {
+    titulo: "Seu pedido chegou",
+    foto:   "fotos/pedido.jpg",
+    texto:  "Você pediu um príncipe encantado para te acompanhar na vida. E eu vou estar aqui pra te ajudar a realizar tudo o que você quiser.",
+    botao:  "fechar"
+  },
+
+  fraseFinal: "Te amo, Sapeca.",
+  assinaturaFinal: "do seu Vinícius"
+};
+/* ===================== fim da área de edição ===================== */
+
+(function(){
+  const $ = s => document.querySelector(s);
+  const C = CONTEUDO;
+  const inicio = new Date(C.nascimento);
+  const reduzido = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  $('#t-carta').textContent   = C.titulos.carta;
+  $('#t-galeria').textContent = C.titulos.galeria;
+  $('#t-video').textContent   = C.titulos.video;
+  $('#t-tempo').textContent   = C.titulos.tempo;
+  $('#t-musica').textContent  = C.titulos.musica;
+  $('#t-motivos').textContent = C.titulos.motivos;
+  $('#diary-label').textContent = C.diarioLabel;
+  $('#quote').textContent = '\u201C' + C.fraseFinal + '\u201D';
+  $('#assinaturaFinal').textContent = C.assinaturaFinal;
+  $('#heroSub').textContent = C.heroLegenda;
+
+  const heroImg = $('#heroImg');
+  if(C.heroFoto){ heroImg.src = C.heroFoto; heroImg.alt = C.heroLegenda || ''; }
+
+  /* contador */
+  const counter = $('#counter');
+  counter.innerHTML = ['anos','meses','dias']
+    .map(l => '<div class="unit"><div class="num" data-u="'+l+'">—</div><div class="label">'+l+'</div></div>').join('');
+  const nums = {
+    anos:  counter.querySelector('[data-u="anos"]'),
+    meses: counter.querySelector('[data-u="meses"]'),
+    dias:  counter.querySelector('[data-u="dias"]')
+  };
+  const beats = $('#beats');
+  const fmt = new Intl.NumberFormat('pt-BR');
+  let ultimoDia = '';
+  function tick(){
+    const agora = new Date();
+    const chave = agora.toDateString();
+    if(chave !== ultimoDia){
+      ultimoDia = chave;
+      let a = agora.getFullYear()-inicio.getFullYear();
+      let m = agora.getMonth()-inicio.getMonth();
+      let d = agora.getDate()-inicio.getDate();
+      if(d < 0){ m--; d += new Date(agora.getFullYear(), agora.getMonth(), 0).getDate(); }
+      if(m < 0){ a--; m += 12; }
+      nums.anos.textContent=a; nums.meses.textContent=m; nums.dias.textContent=d;
+    }
+    beats.textContent = fmt.format(Math.floor((agora-inicio)/1000/60*70));
+  }
+  tick(); setInterval(tick,1000);
+
+  /* diário */
+  const diary=$('#diary'), letter=$('#letter');
+  $('#letter-inner').innerHTML =
+    C.carta.map(p=>'<p>'+p+'</p>').join('') + '<div class="sign">'+C.assinatura+'</div>';
+  function abrirDiario(){
+    const aberto = diary.classList.toggle('open');
+    letter.classList.toggle('show', aberto);
+    diary.setAttribute('aria-expanded', aberto);
+    if(aberto) petalas(diary,14);
+  }
+  diary.addEventListener('click', abrirDiario);
+  diary.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();abrirDiario();} });
+
+  /* galeria */
+  const gallery=$('#gallery');
+  gallery.innerHTML = C.fotos.map(function(f,i){
+    return '<button class="photo" data-i="'+i+'" aria-label="Ampliar foto '+(i+1)+'">'
+      + (f.src ? '<img src="'+f.src+'" alt="'+f.legenda+'" loading="lazy" decoding="async">' : 'foto '+(i+1))
+      + '</button>';
+  }).join('');
+
+  const lb=$('#lightbox'), lbSlot=$('#lbSlot'), lbCap=$('#lbCap');
+  let idx=0, ultimoFoco=null;
+  function abrirLb(i){
+    idx=(i+C.fotos.length)%C.fotos.length;
+    const f=C.fotos[idx];
+    lbSlot.innerHTML = f.src ? '<img src="'+f.src+'" alt="'+f.legenda+'">' : '<span>foto '+(idx+1)+'</span>';
+    lbCap.textContent = C.mostrarLegendas ? (f.legenda||'') : '';
+    if(!lb.classList.contains('show')){ ultimoFoco=document.activeElement; lb.classList.add('show'); $('#lbClose').focus(); }
+  }
+  function fecharLb(){ lb.classList.remove('show'); if(ultimoFoco) ultimoFoco.focus(); }
+  gallery.addEventListener('click',e=>{ const b=e.target.closest('.photo'); if(b) abrirLb(+b.dataset.i); });
+  $('#lbNext').onclick=()=>abrirLb(idx+1);
+  $('#lbPrev').onclick=()=>abrirLb(idx-1);
+  $('#lbClose').onclick=fecharLb;
+  lb.addEventListener('click',e=>{ if(e.target===lb) fecharLb(); });
+  document.addEventListener('keydown',e=>{
+    if(!lb.classList.contains('show')) return;
+    if(e.key==='Escape') fecharLb();
+    if(e.key==='ArrowRight') abrirLb(idx+1);
+    if(e.key==='ArrowLeft') abrirLb(idx-1);
+  });
+
+  /* videos */
+  const vh=$('#videoHolder');
+  const vids = (C.videos||[]).filter(v=>v && v.src);
+  if(vids.length){
+    $('#h-video').textContent = vids.length>1 ? 'toque para assistir' : (vids[0].legenda||'toque para assistir');
+    vh.innerHTML = vids.map(function(v){
+      return '<div class="video-frame">'
+        + '<video controls playsinline preload="none"'+(v.poster?' poster="'+v.poster+'"':'')+'>'
+        + '<source src="'+v.src+'" type="video/mp4">'
+        + 'Seu navegador não consegue tocar este vídeo.'
+        + '</video>'
+        + (v.legenda?'<div class="video-cap">'+v.legenda+'</div>':'')
+        + '</div>';
+    }).join('');
+    const players = vh.querySelectorAll('video');
+    players.forEach(function(v){
+      v.addEventListener('play',function(){ players.forEach(function(o){ if(o!==v) o.pause(); }); });
+    });
+  } else {
+    $('#h-video').textContent = 'espaço reservado';
+    vh.innerHTML = '<div class="video-empty">O vídeo entra aqui. Coloque o arquivo na pasta <b>video</b> e escreva o caminho na lista <b>videos</b>, no topo do código.</div>';
+  }
+
+  /* album */
+  const secAlbum = $('#sec-album');
+  if(C.album && C.album.link){
+    $('#t-album').textContent = C.album.titulo;
+    $('#album-texto').textContent = C.album.texto;
+    const a = $('#album-btn');
+    a.textContent = C.album.botao; a.href = C.album.link;
+  } else if(secAlbum){
+    secAlbum.remove();
+    const r = $('#rule-album'); if(r) r.remove();
+  }
+
+  /* linha do tempo */
+  const timeline=$('#timeline');
+  timeline.innerHTML = C.linhaDoTempo.map(function(m,i){
+    return '<div class="tl-item">'
+      + '<button class="tl-head" aria-expanded="false" aria-controls="d'+i+'">'
+      + '<div class="tl-date">'+m.data+'</div>'
+      + '<div class="tl-title">'+m.titulo+'</div>'
+      + '</button>'
+      + '<div class="tl-detail" id="d'+i+'">'+m.detalhe+'</div>'
+      + '</div>';
+  }).join('');
+  timeline.addEventListener('click',e=>{
+    const h=e.target.closest('.tl-head'); if(!h) return;
+    const aberto = h.parentElement.classList.toggle('open');
+    h.setAttribute('aria-expanded', aberto);
+  });
+
+  /* playlist */
+  const playlist=$('#playlist'), player=$('#player');
+  playlist.innerHTML = C.musicas.map(function(m,i){
+    return '<div class="faixa">'
+      + '<button class="track" data-i="'+i+'">'
+      + '<span class="disc" aria-hidden="true"></span>'
+      + '<span><span class="t-name">'+m.nome+'</span><span class="t-artist" style="display:block">'+m.artista+'</span></span>'
+      + '<span class="t-state">tocar</span>'
+      + '</button>'
+      + '<div class="tocador" id="toca'+i+'"></div>'
+      + '</div>';
+  }).join('');
+  function pararTudo(){
+    playlist.querySelectorAll('.track').forEach(function(x){
+      x.classList.remove('playing'); x.querySelector('.t-state').textContent='tocar';
+    });
+    playlist.querySelectorAll('.tocador').forEach(function(d){ d.innerHTML=''; d.classList.remove('aberto'); });
+    player.pause();
+  }
+  playlist.addEventListener('click',function(e){
+    const t=e.target.closest('.track'); if(!t) return;
+    const i=+t.dataset.i, m=C.musicas[i];
+    const jaTocando=t.classList.contains('playing');
+    pararTudo();
+    if(jaTocando) return;
+    t.classList.add('playing');
+    t.querySelector('.t-state').textContent='tocando';
+    if(m.yt){
+      const d=document.getElementById('toca'+i);
+      d.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+m.yt
+        +'?autoplay=1&rel=0" title="'+m.nome+'" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+      d.classList.add('aberto');
+    } else if(m.src){
+      player.src=m.src; player.play().catch(function(){});
+    }
+  });
+  player.addEventListener('ended', pararTudo);
+
+  /* motivos */
+  const reasons=$('#reasons');
+  reasons.innerHTML = C.motivos.map(function(m,i){
+    return '<button class="card" aria-label="Virar carta '+(i+1)+'">'
+      + '<span class="card-in">'
+      + '<span class="face front">'+String(i+1).padStart(2,'0')+'</span>'
+      + '<span class="face back">'+m+'</span>'
+      + '</span></button>';
+  }).join('');
+  reasons.addEventListener('click',e=>{ const c=e.target.closest('.card'); if(c) c.classList.toggle('flipped'); });
+
+  /* petalas */
+  function petalas(el,qtd){
+    if(reduzido) return;
+    const r=el.getBoundingClientRect();
+    for(let i=0;i<qtd;i++){
+      setTimeout(function(){
+        const p=document.createElement('div');
+        p.className='petal'; p.textContent='\u2767';
+        p.style.left=(r.left+Math.random()*r.width)+'px';
+        p.style.top=(r.top+r.height/2)+'px';
+        document.body.appendChild(p);
+        p.animate([
+          {transform:'translateY(0) rotate(0deg)',opacity:1},
+          {transform:'translateY(-'+(140+Math.random()*120)+'px) translateX('+(Math.random()*80-40)+'px) rotate('+(Math.random()*360)+'deg)',opacity:0}
+        ],{duration:1800+Math.random()*900,easing:'cubic-bezier(.2,.6,.3,1)'}).onfinish=function(){ p.remove(); };
+      }, i*60);
+    }
+  }
+  const pd = C.pedido || {};
+  const pdFundo = $('#pedidoFundo');
+  $('#pedidoTitulo').textContent = pd.titulo || 'Seu pedido chegou';
+  $('#pedidoTexto').textContent  = pd.texto  || '';
+  $('#pedidoFechar').textContent = pd.botao  || 'fechar';
+  const pdImg = $('#pedidoImg');
+  if(pd.foto){ pdImg.src = pd.foto; pdImg.alt = pd.titulo || ''; }
+  else { pdImg.closest('.pedido-foto').style.display = 'none'; }
+
+  let focoAntes = null;
+  function abrirPedido(el){
+    petalas(el, 26);
+    focoAntes = document.activeElement;
+    setTimeout(function(){
+      pdFundo.classList.add('show');
+      $('#pedidoFechar').focus();
+    }, 550);
+  }
+  function fecharPedido(){
+    pdFundo.classList.remove('show');
+    if(focoAntes) focoAntes.focus();
+  }
+  $('#foreverBtn').addEventListener('click', function(e){ abrirPedido(e.currentTarget); });
+  $('#pedidoFechar').addEventListener('click', fecharPedido);
+  pdFundo.addEventListener('click', function(e){ if(e.target===pdFundo) fecharPedido(); });
+  document.addEventListener('keydown', function(e){
+    if(e.key==='Escape' && pdFundo.classList.contains('show')) fecharPedido();
+  });
+
+  /* entrada das secoes */
+  if(!reduzido && 'IntersectionObserver' in window){
+    const alvos=document.querySelectorAll('section .wrap');
+    alvos.forEach(function(a){ a.style.opacity='0'; a.style.transform='translateY(18px)'; a.style.transition='opacity .8s, transform .8s'; });
+    const io=new IntersectionObserver(function(es){
+      es.forEach(function(en){ if(en.isIntersecting){ en.target.style.opacity='1'; en.target.style.transform='none'; io.unobserve(en.target); } });
+    },{rootMargin:'0px 0px -12% 0px'});
+    alvos.forEach(function(a){ io.observe(a); });
+  }
+})();
+</script>
+</body>
+</html>
